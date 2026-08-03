@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — Convites Instituto Hera</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/logo_hera_icon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .card { max-width: 520px; text-align: left; }
+  .card h1 { text-align: center; }
+  .card .subtitle { text-align: center; }
+  .hint { font-size: 12px; color: #8b8290; margin: -10px 0 0; }
+  .status-msg { font-size: 13px; margin-top: 14px; min-height: 18px; }
+  .status-msg.success { color: var(--teal-dark); }
+  .status-msg.error { color: #b3261e; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <img class="logo" src="assets/logo_hera_icon_web.png" alt="Instituto Hera">
+  <p class="eyebrow">Área interna</p>
+  <h1>Gerar convite</h1>
+  <p class="subtitle">Preencha os dados do convidado para gerar o PDF personalizado e enviar pelo WhatsApp</p>
+
+  <form id="admin-form">
+    <label for="nome">Nome do convidado</label>
+    <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+
+    <label for="whatsapp">WhatsApp (com DDD)</label>
+    <input type="text" id="whatsapp" name="whatsapp" placeholder="(19) 99999-9999" required>
+    <p class="hint">Só números, com DDD. Se não tiver o código do país, assumimos Brasil (+55).</p>
+
+    <label for="max">Quantas pessoas esse convite libera (incluindo o convidado)?</label>
+    <select id="max" name="max" required>
+      <option value="1">1 pessoa</option>
+      <option value="2">2 pessoas</option>
+      <option value="3">3 pessoas</option>
+      <option value="4" selected>4 pessoas</option>
+    </select>
+
+    <button type="submit" class="submit-btn" id="submit-btn">Gerar PDF e abrir WhatsApp</button>
+    <div class="status-msg" id="status-msg"></div>
+  </form>
+
+  <footer class="brand-footer">Instituto Hera • painel interno</footer>
+</div>
+
+<script src="vendor/pdf-lib.min.js"></script>
+<script src="config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

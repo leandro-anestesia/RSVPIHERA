@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Adiciona o link clicável de RSVP sobre o botão "CONFIRMAR PRESENÇA (RSVP)"
-já desenhado no PDF de convite (scripts/source_pdf/convite_original.pdf),
+já desenhado no PDF de convite (docs/assets/convite_base.pdf),
 sem alterar nada do visual do convite.
 
 Uso:
@@ -25,7 +25,7 @@ import fitz
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_DIR = os.path.dirname(BASE_DIR)
-SOURCE_PDF = os.path.join(BASE_DIR, "source_pdf", "convite_original.pdf")
+SOURCE_PDF = os.path.join(REPO_DIR, "docs", "assets", "convite_base.pdf")
 OUTPUT_DIR = os.path.join(REPO_DIR, "output")
 
 RSVP_BASE_URL = "https://leandro-anestesia.github.io/rsvpihera/"
