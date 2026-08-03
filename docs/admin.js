@@ -46,13 +46,16 @@
     }
   }
 
-  function slugify(name) {
+  const CONECTIVOS = new Set(["de", "da", "do", "das", "dos", "e"]);
+
+  function getInitials(name) {
     const normalized = name.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
-    const slug = normalized
-      .replace(/[^a-zA-Z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "")
-      .toLowerCase();
-    return slug || "convidado";
+    const initials = normalized
+      .split(/\s+/)
+      .filter((word) => word && !CONECTIVOS.has(word.toLowerCase()))
+      .map((word) => word[0].toUpperCase())
+      .join("");
+    return initials || "X";
   }
 
   function buildRsvpUrl(nome, max) {
@@ -134,7 +137,9 @@
     try {
       const rsvpUrl = buildRsvpUrl(nome, max);
       const pdfBytes = await generatePersonalizedPdf(nome, rsvpUrl);
-      const filename = nome ? `convite-${slugify(nome)}.pdf` : "convite-instituto hera.pdf";
+      const filename = nome
+        ? `convite-instituto hera-${getInitials(nome)}.pdf`
+        : "convite-instituto hera.pdf";
       downloadPdf(pdfBytes, filename);
 
       if (whatsapp) {
