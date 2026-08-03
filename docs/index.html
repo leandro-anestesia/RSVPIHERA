@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confirmar presença — Inauguração Instituto Hera</title>
+<meta name="description" content="Confirme sua presença na inauguração do Instituto Hera.">
+<link rel="icon" href="assets/logo_hera_icon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card" id="form-card">
+  <img class="logo" src="assets/logo_hera_icon_web.png" alt="Instituto Hera">
+  <p class="eyebrow">Inauguração</p>
+  <h1>Instituto Hera</h1>
+  <p class="subtitle">Confirme sua presença no nosso grande dia</p>
+
+  <div class="event-details">
+    <div><strong>Data</strong><span>Sábado, 12 de setembro de 2026</span></div>
+    <div><strong>Horário</strong><span>09h às 12h</span></div>
+    <div><strong>Local</strong><span>Rua Quirino do Amaral Campos, 144 — sala 705, Cambuí</span></div>
+  </div>
+
+  <form id="rsvp-form">
+    <label for="nome">Seu nome completo</label>
+    <input type="text" id="nome" name="nome" placeholder="Digite seu nome" autocomplete="name" required>
+
+    <label for="convidados">Quantas pessoas confirmam (incluindo você)?</label>
+    <select id="convidados" name="convidados" required>
+      <option value="1">1 pessoa</option>
+      <option value="2">2 pessoas</option>
+      <option value="3">3 pessoas</option>
+      <option value="4">4 pessoas</option>
+    </select>
+
+    <button type="submit" class="submit-btn" id="submit-btn">Confirmar presença</button>
+    <div class="error-msg" id="error-msg"></div>
+  </form>
+
+  <footer class="brand-footer">Instituto Hera</footer>
+</div>
+
+<div class="card hidden" id="confirm-card">
+  <div class="confirm-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </div>
+  <p class="eyebrow">Presença confirmada</p>
+  <p class="confirm-name" id="confirm-name">—</p>
+  <span class="confirm-count" id="confirm-count">—</span>
+
+  <div class="event-details">
+    <div><strong>Data</strong><span>Sábado, 12 de setembro de 2026</span></div>
+    <div><strong>Horário</strong><span>09h às 12h</span></div>
+    <div><strong>Local</strong><span>Rua Quirino do Amaral Campos, 144 — sala 705, Cambuí</span></div>
+  </div>
+
+  <a href="#" id="calendar-link" class="calendar-link">Adicionar ao calendário</a>
+  <br>
+  <footer class="brand-footer">Instituto Hera • Nos vemos lá!</footer>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+:root {
+  --teal: #31BBA2;
+  --teal-dark: #1F8577;
+  --mint: #A4D9CD;
+  --mint-light: #E4F5F0;
+  --lavender: #B88AB8;
+  --purple: #8C2887;
+  --purple-dark: #5F1B5C;
+  --ink: #2B2530;
+  --paper: #FFFDF9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Jost", "Poppins", "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at 50% 0%, var(--mint-light) 0%, var(--paper) 55%, var(--paper) 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  line-height: 1.5;
+}
+
+.card {
+  width: 100%;
+  max-width: 460px;
+  background: #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 30px 60px -20px rgba(92, 44, 90, 0.25), 0 8px 24px -8px rgba(47, 179, 157, 0.15);
+  padding: 40px 32px 36px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: var(--mint-light);
+  z-index: 0;
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.logo {
+  width: 88px;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 12px;
+  color: var(--teal-dark);
+  font-weight: 600;
+  margin: 4px 0 2px;
+}
+
+h1 {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  font-size: 28px;
+  color: var(--purple-dark);
+  margin: 4px 0 6px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #6b6270;
+  margin: 0 0 20px;
+}
+
+.event-details {
+  background: var(--mint-light);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin: 0 0 26px;
+  text-align: left;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.event-details div {
+  display: flex;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.event-details strong {
+  color: var(--teal-dark);
+  min-width: 68px;
+  flex-shrink: 0;
+}
+
+form {
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--purple-dark);
+  margin: 16px 0 6px;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1.5px solid #e3ddd4;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  transition: border-color 0.15s ease;
+}
+
+input[type="text"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--teal);
+}
+
+button.submit-btn {
+  width: 100%;
+  margin-top: 26px;
+  padding: 15px 18px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 12px 24px -10px rgba(31, 133, 119, 0.55);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+button.submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 28px -10px rgba(31, 133, 119, 0.6);
+}
+
+button.submit-btn:disabled {
+  opacity: 0.65;
+  cursor: default;
+  transform: none;
+}
+
+.error-msg {
+  color: #b3261e;
+  font-size: 13px;
+  margin-top: 10px;
+  min-height: 16px;
+}
+
+/* Confirmation screen */
+.confirm-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal) 0%, var(--purple) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+.confirm-icon svg {
+  width: 34px;
+  height: 34px;
+  stroke: #fff;
+}
+
+.confirm-name {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 24px;
+  color: var(--purple-dark);
+  margin: 4px 0 2px;
+}
+
+.confirm-count {
+  display: inline-block;
+  margin: 10px 0 22px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: var(--mint-light);
+  color: var(--teal-dark);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.calendar-link {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--teal-dark);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--teal);
+  padding-bottom: 2px;
+}
+
+.calendar-link:hover {
+  color: var(--purple-dark);
+  border-color: var(--purple);
+}
+
+footer.brand-footer {
+  margin-top: 28px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b7aeb6;
+}
+
+.hidden {
+  display: none !important;
+}
