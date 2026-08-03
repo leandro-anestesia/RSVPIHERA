@@ -28,12 +28,13 @@
   <p class="subtitle">Preencha os dados do convidado para gerar o PDF personalizado e enviar pelo WhatsApp</p>
 
   <form id="admin-form">
-    <label for="nome">Nome do convidado</label>
-    <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+    <label for="nome">Nome do convidado (opcional)</label>
+    <input type="text" id="nome" name="nome" placeholder="Deixe em branco para um convite genérico">
+    <p class="hint">Em branco = convite genérico, sem nome, para o próprio convidado preencher os dados ao confirmar.</p>
 
-    <label for="whatsapp">WhatsApp (com DDD)</label>
-    <input type="text" id="whatsapp" name="whatsapp" placeholder="(19) 99999-9999" required>
-    <p class="hint">Só números, com DDD. Se não tiver o código do país, assumimos Brasil (+55).</p>
+    <label for="whatsapp">WhatsApp com DDD (opcional)</label>
+    <input type="text" id="whatsapp" name="whatsapp" placeholder="(19) 99999-9999">
+    <p class="hint">Só números, com DDD. Sem código do país, assumimos Brasil (+55). Em branco, só baixa o PDF sem abrir o WhatsApp.</p>
 
     <label for="max">Quantas pessoas esse convite libera (incluindo o convidado)?</label>
     <select id="max" name="max" required>

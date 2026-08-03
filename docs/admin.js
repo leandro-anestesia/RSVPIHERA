@@ -56,6 +56,11 @@
   }
 
   function buildRsvpUrl(nome, max) {
+    if (!nome) {
+      // Convite genérico: sem nome fixo, o convidado escolhe livremente
+      // quantas pessoas confirmar (1 a 4) na própria página de RSVP.
+      return RSVP_BASE_URL;
+    }
     const params = new URLSearchParams({ nome, max: String(max) });
     return `${RSVP_BASE_URL}?${params.toString()}`;
   }
@@ -69,8 +74,9 @@
   }
 
   function buildWhatsappMessage(nome, rsvpUrl) {
+    const greeting = nome ? `Olá ${nome}! 🌿✨` : "Olá! 🌿✨";
     return [
-      `Olá ${nome}! 🌿✨`,
+      greeting,
       "",
       "Você está convidado(a) para a inauguração do *Instituto Hera*!",
       "",
@@ -122,29 +128,30 @@
     const whatsapp = document.getElementById("whatsapp").value.trim();
     const max = document.getElementById("max").value;
 
-    if (!nome || !whatsapp) {
-      statusMsg.textContent = "Preencha o nome e o WhatsApp do convidado.";
-      statusMsg.className = "status-msg error";
-      return;
-    }
-
     submitBtn.disabled = true;
     submitBtn.textContent = "Gerando PDF...";
 
     try {
       const rsvpUrl = buildRsvpUrl(nome, max);
       const pdfBytes = await generatePersonalizedPdf(nome, rsvpUrl);
-      downloadPdf(pdfBytes, `convite-${slugify(nome)}.pdf`);
+      const filename = nome ? `convite-${slugify(nome)}.pdf` : "convite-generico.pdf";
+      downloadPdf(pdfBytes, filename);
 
-      const phone = normalizePhone(whatsapp);
-      const text = buildWhatsappMessage(nome, rsvpUrl);
-      const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+      if (whatsapp) {
+        const phone = normalizePhone(whatsapp);
+        const text = buildWhatsappMessage(nome, rsvpUrl);
+        const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
 
-      statusMsg.textContent =
-        "PDF baixado! Abrindo o WhatsApp — anexe o arquivo baixado antes de enviar.";
-      statusMsg.className = "status-msg success";
+        statusMsg.textContent =
+          "PDF baixado! Abrindo o WhatsApp — anexe o arquivo baixado antes de enviar.";
+        statusMsg.className = "status-msg success";
 
-      window.open(waUrl, "_blank");
+        window.open(waUrl, "_blank");
+      } else {
+        statusMsg.textContent =
+          "PDF baixado! Nenhum WhatsApp informado, envie manualmente pelo canal que preferir.";
+        statusMsg.className = "status-msg success";
+      }
     } catch (err) {
       console.error(err);
       statusMsg.textContent = "Algo deu errado ao gerar o convite: " + err.message;
