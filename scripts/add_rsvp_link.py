@@ -28,7 +28,7 @@ REPO_DIR = os.path.dirname(BASE_DIR)
 SOURCE_PDF = os.path.join(REPO_DIR, "docs", "assets", "convite_base.pdf")
 OUTPUT_DIR = os.path.join(REPO_DIR, "output")
 
-RSVP_BASE_URL = "https://leandro-anestesia.github.io/rsvpihera/"
+RSVP_BASE_URL = "https://leandro-anestesia.github.io/RSVPIHERA/"
 
 # Coordenadas (em pontos, origem no topo-esquerdo da página) do botão
 # "CONFIRMAR PRESENÇA (RSVP)" detectadas no PDF original, com uma

@@ -5,4 +5,4 @@ const GAS_ENDPOINT = "COLE_AQUI_A_URL_DO_SEU_GOOGLE_APPS_SCRIPT";
 
 // URL pública desta página de RSVP depois de publicada no GitHub Pages.
 // Usada pela página admin.html para montar o link personalizado de cada convidado.
-const RSVP_BASE_URL = "https://leandro-anestesia.github.io/rsvpihera/";
+const RSVP_BASE_URL = "https://leandro-anestesia.github.io/RSVPIHERA/";
