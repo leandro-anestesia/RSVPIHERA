@@ -134,7 +134,7 @@
     try {
       const rsvpUrl = buildRsvpUrl(nome, max);
       const pdfBytes = await generatePersonalizedPdf(nome, rsvpUrl);
-      const filename = nome ? `convite-${slugify(nome)}.pdf` : "convite-generico.pdf";
+      const filename = nome ? `convite-${slugify(nome)}.pdf` : "convite-instituto hera.pdf";
       downloadPdf(pdfBytes, filename);
 
       if (whatsapp) {
