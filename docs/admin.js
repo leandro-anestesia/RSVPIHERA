@@ -113,6 +113,30 @@
     setTimeout(() => URL.revokeObjectURL(url), 5000);
   }
 
+  // No celular, um download de blob nem sempre "salva" o arquivo de
+  // verdade (o navegador só abre o PDF numa aba). Por isso preferimos a
+  // Web Share API quando disponível: ela abre a folha de compartilhar
+  // nativa do aparelho, o arquivo já vai anexado, e a pessoa escolhe o
+  // WhatsApp (ou Salvar em Arquivos, etc.) direto por lá.
+  async function shareFile(bytes, filename, text) {
+    if (!navigator.canShare || !navigator.share) {
+      return { supported: false };
+    }
+    const file = new File([bytes], filename, { type: "application/pdf" });
+    if (!navigator.canShare({ files: [file] })) {
+      return { supported: false };
+    }
+    try {
+      await navigator.share({ files: [file], text });
+      return { supported: true, shared: true };
+    } catch (err) {
+      if (err.name === "AbortError") {
+        return { supported: true, shared: false, cancelled: true };
+      }
+      return { supported: true, shared: false };
+    }
+  }
+
   form.addEventListener("submit", async function (event) {
     event.preventDefault();
     statusMsg.textContent = "";
@@ -130,22 +154,36 @@
       const filename = nome
         ? `convite-instituto hera-${getInitials(nome)}.pdf`
         : "convite-instituto hera.pdf";
-      downloadPdf(pdfBytes, filename);
+      const text = buildWhatsappMessage(nome);
 
-      if (whatsapp) {
-        const phone = normalizePhone(whatsapp);
-        const text = buildWhatsappMessage(nome);
-        const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+      const shareResult = await shareFile(pdfBytes, filename, text);
 
+      if (shareResult.shared) {
         statusMsg.textContent =
-          "PDF baixado! Abrindo o WhatsApp — anexe o arquivo baixado antes de enviar.";
+          "Pronto! Escolha o WhatsApp na tela que abriu — o convite já vai anexado.";
         statusMsg.className = "status-msg success";
-
-        window.open(waUrl, "_blank");
+      } else if (shareResult.cancelled) {
+        statusMsg.textContent = "Compartilhamento cancelado.";
+        statusMsg.className = "status-msg";
       } else {
-        statusMsg.textContent =
-          "PDF baixado! Nenhum WhatsApp informado, envie manualmente pelo canal que preferir.";
-        statusMsg.className = "status-msg success";
+        // Sem suporte a compartilhar arquivo (ex: computador) ou falhou:
+        // baixa o PDF e, se houver WhatsApp, já abre a conversa (sem anexo).
+        downloadPdf(pdfBytes, filename);
+
+        if (whatsapp) {
+          const phone = normalizePhone(whatsapp);
+          const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+
+          statusMsg.textContent =
+            "PDF baixado! Abrindo o WhatsApp — anexe o arquivo baixado antes de enviar.";
+          statusMsg.className = "status-msg success";
+
+          window.open(waUrl, "_blank");
+        } else {
+          statusMsg.textContent =
+            "PDF baixado! Nenhum WhatsApp informado, envie manualmente pelo canal que preferir.";
+          statusMsg.className = "status-msg success";
+        }
       }
     } catch (err) {
       console.error(err);
@@ -153,7 +191,7 @@
       statusMsg.className = "status-msg error";
     } finally {
       submitBtn.disabled = false;
-      submitBtn.textContent = "Gerar PDF e abrir WhatsApp";
+      submitBtn.textContent = "Gerar e compartilhar convite";
     }
   });
 })();

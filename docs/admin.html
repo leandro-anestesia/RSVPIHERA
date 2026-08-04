@@ -25,7 +25,7 @@
   <img class="logo" src="assets/logo_hera_icon_web.png" alt="Instituto Hera">
   <p class="eyebrow">Área interna</p>
   <h1>Gerar convite</h1>
-  <p class="subtitle">Preencha os dados do convidado para gerar o PDF personalizado e enviar pelo WhatsApp</p>
+  <p class="subtitle">Preencha os dados do convidado para gerar o PDF personalizado</p>
 
   <form id="admin-form">
     <label for="nome">Nome do convidado (opcional)</label>
@@ -34,9 +34,9 @@
 
     <label for="whatsapp">WhatsApp com DDD (opcional)</label>
     <input type="text" id="whatsapp" name="whatsapp" placeholder="(19) 99999-9999">
-    <p class="hint">Só números, com DDD. Sem código do país, assumimos Brasil (+55). Em branco, só baixa o PDF sem abrir o WhatsApp.</p>
+    <p class="hint">Só usado se o aparelho não suportar compartilhar o arquivo direto (aí abrimos o WhatsApp já endereçado, mas sem anexo automático). No celular, o normal é aparecer a tela de compartilhar com o convite já anexado.</p>
 
-    <button type="submit" class="submit-btn" id="submit-btn">Gerar PDF e abrir WhatsApp</button>
+    <button type="submit" class="submit-btn" id="submit-btn">Gerar e compartilhar convite</button>
     <div class="status-msg" id="status-msg"></div>
   </form>
 
