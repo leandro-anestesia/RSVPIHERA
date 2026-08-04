@@ -78,22 +78,11 @@
     return digits;
   }
 
-  function buildWhatsappMessage(nome, rsvpUrl) {
+  function buildWhatsappMessage(nome) {
     const greeting = nome ? `Olá ${nome}! 🌿✨` : "Olá! 🌿✨";
-    return [
-      greeting,
-      "",
-      "Você está convidado(a) para a inauguração do *Instituto Hera*!",
-      "",
-      "📅 Sábado, 12 de setembro de 2026",
-      "🕘 09h às 12h",
-      "📍 Rua Quirino do Amaral Campos, 144 — sala 705, Cambuí",
-      "",
-      "Seu convite em PDF está anexado a esta conversa 📎",
-      `Confirme sua presença por aqui: ${rsvpUrl}`,
-      "",
-      "Será um prazer ter você conosco! 💛",
-    ].join("\n");
+    return [greeting, "", "Preparamos um convite especial para você, confira em anexo 📎"].join(
+      "\n"
+    );
   }
 
   async function generatePersonalizedPdf(nome, rsvpUrl) {
@@ -145,7 +134,7 @@
 
       if (whatsapp) {
         const phone = normalizePhone(whatsapp);
-        const text = buildWhatsappMessage(nome, rsvpUrl);
+        const text = buildWhatsappMessage(nome);
         const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
 
         statusMsg.textContent =
