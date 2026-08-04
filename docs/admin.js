@@ -58,13 +58,15 @@
     return initials || "X";
   }
 
-  function buildRsvpUrl(nome, max) {
+  function buildRsvpUrl(nome) {
     if (!nome) {
       // Convite genérico: sem nome fixo, o convidado escolhe livremente
-      // quantas pessoas confirmar (1 a 4) na própria página de RSVP.
+      // seu nome e quantas pessoas confirmar (1 a 5) na própria página de RSVP.
       return RSVP_BASE_URL;
     }
-    const params = new URLSearchParams({ nome, max: String(max) });
+    // A quantidade de pessoas também fica livre para o convidado escolher
+    // ao confirmar — só o nome vem pré-preenchido.
+    const params = new URLSearchParams({ nome });
     return `${RSVP_BASE_URL}?${params.toString()}`;
   }
 
@@ -129,13 +131,12 @@
 
     const nome = document.getElementById("nome").value.trim();
     const whatsapp = document.getElementById("whatsapp").value.trim();
-    const max = document.getElementById("max").value;
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Gerando PDF...";
 
     try {
-      const rsvpUrl = buildRsvpUrl(nome, max);
+      const rsvpUrl = buildRsvpUrl(nome);
       const pdfBytes = await generatePersonalizedPdf(nome, rsvpUrl);
       const filename = nome
         ? `convite-instituto hera-${getInitials(nome)}.pdf`
